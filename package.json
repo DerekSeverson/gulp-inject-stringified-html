@@ -14,17 +14,23 @@
     "url": "https://DerekSeverson@github.com/DerekSeverson/gulp-inject-stringified-html.git"
   },
   "keywords": [
-    "Gulp",
-    "Html",
-    "Stringify",
-    "Inject",
-    "Replace",
-    "Template"
+    "gulpplugin",
+    "gulp",
+    "html",
+    "stringify",
+    "inject",
+    "replace",
+    "template"
   ],
   "author": "Derek Severson",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DerekSeverson/gulp-inject-stringified-html/issues"
   },
-  "homepage": "https://github.com/DerekSeverson/gulp-inject-stringified-html"
+  "homepage": "https://github.com/DerekSeverson/gulp-inject-stringified-html",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.0"
+  }
 }
