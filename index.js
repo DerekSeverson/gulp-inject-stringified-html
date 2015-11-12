@@ -5,61 +5,74 @@ var gutil = require('gulp-util');
 var through = require('through2');
 var path = require('path');
 var fs = require('fs');
+var htmlJsStr = require('js-string-escape');
+var concatStream = require('concat-stream');
+
 
 var PluginError = gutil.PluginError;
-var regex = /!!!!\(\s*(?:'|")([^\v'"]*)(?:'|")\s*\)/g;
-var defaults = {
-  begin: '!!!!(',
-  end: ')'
-};
+var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/g;
 
 const PLUGIN_NAME = 'gulp-inject-stringified-html';
 
 
 
-function escapeForRegex(text) {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
-
-
-
 // gulp plugin
-function gulpInjectStringifiedHtml(params) {
-  params = processParameters(params);
-
+function gulpInjectStringifiedHtml() {
 
   // create and return a stream through which each file will pass
   return through.obj(function (file, enc, cb) {
+    var contents;
 
-    if (file.isBuffer()) {
-      this.emit('error', new PluginError(PLUGIN_NAME, 'Buffers not supported!'));
-      return cb();
-    }
+    //if (gutil.isStream(file)) {
+    //  file.contents = file.contents.pipe(concatStream(function (buffer,) {
+    //
+    //  }));
+    //}
+    //
+    //if (gutil.isBuffer(file)) {
+    //  file.contents = doInjectHtml(file.contents, file.base);
+    //}
 
-    if (file.isStream()) {
+    file.pipe(concatStream(function (data) {
+      cb(null, doInjectHtml(data, file.base));
+    }));
 
-      
-
-
-
-    }
-
-
-    // make sure the file goes through the next gulp plugin
-    this.push(file);
-
-    // tell the stream engine that we are done with this file
-    cb();
   });
 }
 
-function processParameters(params) {
-  // @todo: process/normalize parameters
+function doInjectHtml(buffer, relpath) {
+  var result;
+  var found = [];
+  var contents = buffer.toString();
 
-  return params;
+  // Nothing to do here.
+  if (!regex.text(contents)) return buffer;
+
+  // Do replacement!
+
+  while (result = regex.exec(contents)) {
+    found.push({
+      replacee: result[0], // matching string !!!('./index.html')
+      filepath: result[1]  // matching group  './index.html'
+    });
+  }
+
+  found.forEach(function (o) {
+    var htmlFilePath = path.resolve(relpath, o.filepath);
+    var htmlContent = read(htmlFilePath);
+
+    htmlContent = htmlJsStr(htmlContent);
+    htmlContent = ['"', htmlContent, '"'].join('');
+
+    contents = contents.replace(o.replacee, htmlContent);
+  });
+
+  return new Buffer(contents);
 }
 
-
+function read(filepath) {
+  return fs.readFileSync(filepath, 'ut8');
+}
 
 
 
