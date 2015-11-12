@@ -28,10 +28,13 @@ describe ('gulp-inject-stringified-html', function () {
       should.exist(newFile);
       should.exist(newFile.contents);
 
-      newFile.contents.pipe(concatStream({encoding: 'string'}), function (data) {
-        data.should.equal(fs.readFileSync('test/expected.js'), 'utf8');
+      newFile.pipe(concatStream({encoding: 'string'}, function (data) {
+        var expectedString = fs.readFileSync('test/expected.js', 'utf8');
+
+        data.should.equal(expectedString);
+
         done();
-      });
+      }));
     });
 
     stream.write(file);
@@ -54,7 +57,11 @@ describe ('gulp-inject-stringified-html', function () {
       should.exist(newFile);
       should.exist(newFile.contents);
 
-      String(newFile.contents).should.equal(fs.readFileSync('test/expected.js'), 'utf8');
+      var expectedString = fs.readFileSync('test/expected.js', 'utf8');
+      var contentsString = newFile.contents.toString();
+
+      String(contentsString).should.equal(expectedString);
+
       done();
     });
 

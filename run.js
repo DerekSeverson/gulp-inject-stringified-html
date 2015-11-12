@@ -9,7 +9,7 @@ var chai = require('chai'),
 var concatStream = require('concat-stream');
 var fs = require('fs');
 var File = require('vinyl');
-var injectStringifiedHtml = require('../index.js');
+var injectStringifiedHtml = require('./index.js');
 
 
 
@@ -28,10 +28,11 @@ var injectStringifiedHtml = require('../index.js');
     should.exist(newFile);
     should.exist(newFile.contents);
 
-    newFile.contents.pipe(concatStream({encoding: 'string'}), function (data) {
-      data.should.equal(fs.readFileSync('test/expected.js'), 'utf8');
-      done();
-    });
+    newFile.pipe(concatStream({encoding: 'string'}, function (data) {
+      var expectedString = fs.readFileSync('test/expected.js', 'utf8');
+
+      data.should.equal(expectedString);
+    }));
   });
 
   stream.write(file);
@@ -54,8 +55,10 @@ var injectStringifiedHtml = require('../index.js');
     should.exist(newFile);
     should.exist(newFile.contents);
 
-    String(newFile.contents).should.equal(fs.readFileSync('test/expected.js'), 'utf8');
-    done();
+    var expectedString = fs.readFileSync('test/expected.js', 'utf8');
+    var contentsString = newFile.contents.toString();
+
+    String(contentsString).should.equal(expectedString);
   });
 
   stream.write(file);

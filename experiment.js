@@ -8,7 +8,7 @@ var htmlJsStr = require('js-string-escape');
 
 //var regex = /!!!!\(\s*(?:'|")([^\v'"]*)(?:'|")\s*\)/g;
 
-var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/g;
+var regex = /\{\s*gulp_inject:\s*(?:'|")([^'"]*)(?:'|")\s*\}/g;
 var content = read('test/subject.js');
 
 //console.log('Before: ', content);

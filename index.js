@@ -10,7 +10,7 @@ var concatStream = require('concat-stream');
 
 
 var PluginError = gutil.PluginError;
-var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/g;
+var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/gm;
 
 var PLUGIN_NAME = 'gulp-inject-stringified-html';
 
@@ -34,7 +34,8 @@ function gulpInjectStringifiedHtml() {
     //}
 
     file.pipe(concatStream({encoding: 'string'},function (data) {
-      cb(null, doInjectHtml(data, file.base));
+      file.contents = doInjectHtml(data, file.base);
+      cb(null, file);
     }));
 
   });
@@ -45,11 +46,11 @@ function doInjectHtml(contents, relpath) {
   var found = [];
 
   // Nothing to do here.
-  if (!regex.text(contents)) return buffer;
+  //if (!regex.test(contents)) return contents;
 
   // Do replacement!
 
-  while (result = regex.exec(contents)) {
+  while (_.isArray((result = regex.exec(contents)))) {
     found.push({
       replacee: result[0], // matching string !!!('./index.html')
       filepath: result[1]  // matching group  './index.html'
@@ -70,7 +71,7 @@ function doInjectHtml(contents, relpath) {
 }
 
 function read(filepath) {
-  return fs.readFileSync(filepath, 'ut8');
+  return fs.readFileSync(filepath, 'utf8');
 }
 
 
