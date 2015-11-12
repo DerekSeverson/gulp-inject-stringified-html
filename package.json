@@ -1,0 +1,30 @@
+{
+  "name": "gulp-inject-stringified-html",
+  "version": "1.0.0",
+  "description": "Gulp Plugin to Inject Html Files as Strings via Escape Sequences",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://DerekSeverson@github.com/DerekSeverson/gulp-inject-stringified-html.git"
+  },
+  "keywords": [
+    "Gulp",
+    "Html",
+    "Stringify",
+    "Inject",
+    "Replace",
+    "Template"
+  ],
+  "author": "Derek Severson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DerekSeverson/gulp-inject-stringified-html/issues"
+  },
+  "homepage": "https://github.com/DerekSeverson/gulp-inject-stringified-html"
+}
