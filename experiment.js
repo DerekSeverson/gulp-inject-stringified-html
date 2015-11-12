@@ -9,7 +9,7 @@ var htmlJsStr = require('js-string-escape');
 //var regex = /!!!!\(\s*(?:'|")([^\v'"]*)(?:'|")\s*\)/g;
 
 var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/g;
-var content = read(getFilePath('subject.js'));
+var content = read('test/subject.js');
 
 //console.log('Before: ', content);
 
@@ -46,7 +46,7 @@ found.forEach(function (o) {
 
 console.log('DONE: ', content);
 
-fs.writeFile('out.js', content);
+fs.writeFile('test/expected.js', content);
 
 
 
@@ -57,5 +57,5 @@ function read(filename) {
 }
 
 function getFilePath(relpath) {
-  return path.resolve(__dirname, relpath);
+  return path.resolve('test', relpath);
 }

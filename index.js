@@ -12,7 +12,7 @@ var concatStream = require('concat-stream');
 var PluginError = gutil.PluginError;
 var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/g;
 
-const PLUGIN_NAME = 'gulp-inject-stringified-html';
+var PLUGIN_NAME = 'gulp-inject-stringified-html';
 
 
 
@@ -33,17 +33,16 @@ function gulpInjectStringifiedHtml() {
     //  file.contents = doInjectHtml(file.contents, file.base);
     //}
 
-    file.pipe(concatStream(function (data) {
+    file.pipe(concatStream({encoding: 'string'},function (data) {
       cb(null, doInjectHtml(data, file.base));
     }));
 
   });
 }
 
-function doInjectHtml(buffer, relpath) {
+function doInjectHtml(contents, relpath) {
   var result;
   var found = [];
-  var contents = buffer.toString();
 
   // Nothing to do here.
   if (!regex.text(contents)) return buffer;

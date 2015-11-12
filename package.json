@@ -36,6 +36,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
+    "chai": "^3.4.1",
     "lodash": "^3.10.1",
     "mocha": "^2.3.3",
     "vinyl": "^1.1.0"
