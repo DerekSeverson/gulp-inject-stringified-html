@@ -14,9 +14,14 @@ For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/
 1. **BAD** - `templateUrl` creates dependency between View logic and template's URL location
 2. **UGLY** - `template` forces developer to manually escape html string _(tedious, unreadable)_
 
-In a perfect world, `View` logic should be have readable templates and completely _orthogonal_ to how templates are retreived from URLs!!
+In a perfect world... 
 
-The **GOOD** 
++ Templates should be readable.
++ View logic should be _orthogonal_ to template URL location.
+
+A Solution...
+
++ **GOOD** - `gulp-inject-stringifed-html` plugin solves the above issues during the build process.
 
 
 ## Usage
