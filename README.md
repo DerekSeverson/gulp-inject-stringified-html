@@ -31,7 +31,9 @@ Then, add it to your gulpfile.js:
 
 ### Basics
 
-Basically, by putting `{ gulp_inject: './path/to/your/file.html' }` inside your javascript file and adding `gulp-inject-stringified-html` to your gulp tasks that build your javascript source code, the html template referenced in the javascript code will be stringified (escaped for embedding html in a javascript string) and injected inline. 
++ Put `{ gulp_inject: './path/to/your/file.html' }` inside your javascript file.
++ Use `gulp-inject-stringified-html` in your Javascript gulp tasks. 
++ _That's It!_
 
 Below is the basic usage of how to use `gulp-inject-stringified-html` in a project using gulp as a build process and its expected results.
 
