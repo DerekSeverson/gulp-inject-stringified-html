@@ -13,7 +13,7 @@ When building single page web applications (SPAs), the View / ViewController / C
 
 In a perfect world, ViewController logic should be completely orthogonal to how resources are retreived from URLs.  Using `template` directive attribute is tedious for the developer and makes the html code unreadable.  Using `templateUrl` forces a irregular dependency between the ViewController and an URL for its required template causing further complications.
 
-**`gulp-inject-stringified-html` solves these problems. **
+`gulp-inject-stringified-html` **solves these problems**.
 
 
 ## Usage
