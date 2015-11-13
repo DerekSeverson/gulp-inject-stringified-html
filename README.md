@@ -23,7 +23,7 @@ A Solution...
 
 + **GOOD** - embed template in View logic at build time _(automation! DRY!)_.
 
-The `gulp-inject-stringified-html` gulp plugin does just that!!
+The `gulp-inject-stringified-html` gulp plugin does just that :)
 
 
 ## Usage
