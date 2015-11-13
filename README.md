@@ -35,7 +35,7 @@ Then, add it to your gulpfile.js:
 + Use `gulp-inject-stringified-html` in your Javascript gulp tasks. 
 + _That's It!_
 
-Below is the basic usage of how to use `gulp-inject-stringified-html` in a project using gulp as a build process and its expected results.
+Below is example code and its expected output.
 
 ```javascript
 // gulpfile.js
