@@ -74,10 +74,10 @@ gulp.task('js', function () {
   
   return gulp.src(['src/**/*.js')
     .pipe(newer(path.join(dest, filename)))
-    .pipe(injectHtml())  // <--- gulp-inject-stringified-html here.
     .pipe(sourcemaps.init())
-        .pipe(concat(filename))
-        .pipe(uglify())
+      .pipe(injectHtml())  // <--- gulp-inject-stringified-html here.
+      .pipe(concat(filename))
+      .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dest));
 });
