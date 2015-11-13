@@ -9,14 +9,12 @@ var concatStream = require('concat-stream');
 
 
 var PluginError = gutil.PluginError;
-var regex = /\{\s*gulp_inject:\s(?:'|")([^'"]*)(?:'|")\s*\}/gm;
-
 var PLUGIN_NAME = 'gulp-inject-stringified-html';
 
 
 
 // gulp plugin
-function gulpInjectStringifiedHtml() {
+function gulpInjectStringifiedHtml(params) {
 
   // create and return a stream through which each file will pass
   return through.obj(function (file, enc, cb) {
@@ -33,19 +31,19 @@ function gulpInjectStringifiedHtml() {
     //}
 
     file.pipe(concatStream({encoding: 'string'},function (data) {
-      file.contents = doInjectHtml(data, file);
+      file.contents = doInjectHtml(data, file, params);
       cb(null, file);
     }));
 
   });
 }
 
-function doInjectHtml(contents, vinyl) {
+function doInjectHtml(contents, vinyl, params) {
   var result;
   var found = [];
   var cwd = vinyl.cwd;
   var relpath = path.dirname(vinyl.history[0]); // removes file name
-
+  var regex = createRegex(params);
   // Nothing to do here.
   //if (!regex.test(contents)) return contents;
 
@@ -84,6 +82,20 @@ function read(filepath) {
   return fs.readFileSync(filepath, 'utf8');
 }
 
+function createRegex(params) {
+  var regex = /\{\s*gulp_inject:\s*(?:'|")([^'"]*)(?:'|")\s*\}/gm; // default
+  var innerRegex = '\\s*(?:\'|")([^\'"]*)(?:\'|")\\s*'; // used when pre & post are given
+
+  if (params.pre && params.post) {
+    regex = new RegExp( escRegExp(params.pre) + innerRegex + escRegExp(params.post), 'gm');
+  }
+
+  return regex;
+}
+
+function escRegExp(string){
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 // Export the plugin
 module.exports = gulpInjectStringifiedHtml;
