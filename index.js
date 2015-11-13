@@ -86,7 +86,7 @@ function createRegex(params) {
   var regex = /\{\s*gulp_inject:\s*(?:'|")([^'"]*)(?:'|")\s*\}/gm; // default
   var innerRegex = '\\s*(?:\'|")([^\'"]*)(?:\'|")\\s*'; // used when pre & post are given
 
-  if (params.pre && params.post) {
+  if (params && params.pre && params.post) {
     regex = new RegExp( escRegExp(params.pre) + innerRegex + escRegExp(params.post), 'gm');
   }
 
