@@ -33,16 +33,18 @@ function gulpInjectStringifiedHtml() {
     //}
 
     file.pipe(concatStream({encoding: 'string'},function (data) {
-      file.contents = doInjectHtml(data, file.base);
+      file.contents = doInjectHtml(data, file);
       cb(null, file);
     }));
 
   });
 }
 
-function doInjectHtml(contents, relpath) {
+function doInjectHtml(contents, vinyl) {
   var result;
   var found = [];
+  var cwd = vinyl.cwd;
+  var relpath = path.dirname(vinyl.history[0]); // removes file name
 
   // Nothing to do here.
   //if (!regex.test(contents)) return contents;
@@ -57,9 +59,18 @@ function doInjectHtml(contents, relpath) {
   }
 
   found.forEach(function (o) {
-    var htmlFilePath = path.resolve(relpath, o.filepath);
-    var htmlContent = read(htmlFilePath);
 
+    // resolve file path to template
+    var htmlFilePath, htmlContent;
+    if (path.isAbsolute(o.filepath)) {
+      // absolute path from project root (cwd)
+      htmlFilePath = path.join(cwd, o.filepath);
+    } else { // relative path from js file (relpath)
+      htmlFilePath = path.join(relpath, o.filepath);
+    }
+    htmlFilePath = path.normalize(htmlFilePath);
+
+    htmlContent = read(htmlFilePath);
     htmlContent = htmlJsStr(htmlContent);
     htmlContent = ['"', htmlContent, '"'].join('');
 
@@ -74,13 +85,5 @@ function read(filepath) {
 }
 
 
-
-
-
-
-
-
-
-
-
+// Export the plugin
 module.exports = gulpInjectStringifiedHtml;
