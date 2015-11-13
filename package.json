@@ -1,6 +1,6 @@
 {
   "name": "gulp-inject-stringified-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gulp Plugin to Inject Html Files as Strings via Escape Sequences",
   "main": "index.js",
   "directories": {
