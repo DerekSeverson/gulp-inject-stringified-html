@@ -14,14 +14,15 @@ Then, add it to your gulpfile.js:
 
 ### Why?
 
-When building single page web applications (SPAs), the View/ViewController/Controller/Presenter/ViewModel (the star in MV* which we'll refer to as ViewController) needs to know the "template" being rendered and bound to.  For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/directive), either a `template` or `templateUrl` property can be given so the directive knows what html to render when compiled.  This has two unfortunate consequences:
+When building single page web applications (SPAs), the View / ViewController / Controller / Presenter / ViewModel (the star in MV* which we'll refer to as ViewController) needs to know the "template" being rendered and bound to.  For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/directive), either a `template` or `templateUrl` property can be given so the directive knows what html to render when compiled.  
 
+**Issues with Directives:**
 1. `template` forces the developer to manually escape the html string value
 2. `templateUrl` forces the developer to have to know the URL path that the template will be located at when deployed to a server or local environment
 
 In a perfect world, ViewController logic should be completely orthogonal to how resources are retreived from URLs.  Using `template` directive attribute is tedious for the developer and makes the html code unreadable.  Using `templateUrl` forces a irregular dependency between the ViewController and an URL for its required template causing further complications.
 
-`gulp-inject-stringified-html` solves these problems. 
+**`gulp-inject-stringified-html` solves these problems. **
 
 ### How?
 
