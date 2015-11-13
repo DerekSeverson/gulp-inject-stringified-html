@@ -114,8 +114,8 @@ var injectHtml = require('gulp-inject-stringified-html');
 gulp.task('js', function () {
   return gulp.src(['src/views/hello.js'])
     .pipe(injectHtml({
-      pre: '!!![[[',
-      post: ']]]'
+      pre: '!!![[[',                  // <-- custom beginning tag!
+      post: ']]]'                     // <-- and custom end tag!!
     }))
     .pipe(gulp.dest('public/hello.js'));
 ```
@@ -124,7 +124,7 @@ gulp.task('js', function () {
 // src/views/hello.js
 
 function sayHello() {
-  return !!![[[ 'hello.html' ]]];
+  return !!![[[ 'hello.html' ]]];    // <-- Usage of custom tags!!!
 }
 ```
 
@@ -132,10 +132,9 @@ function sayHello() {
 
 ##### Relative Paths
 
-Often Single-Page-Application (SPA) projects put templates and javascript views 
-components in the same directory structure - and thus `gulp-inject-stringified-html` 
-allows "Relative Paths".  The examples above both use relative paths to inject 
-the corresponding template.
+All examples above use relative paths to inject the corresponding template.
+
+Often single page apps put templates and view logic in the same directory. Using relative paths with `gulp-inject-stringified-html` are usually best for this.
 
 ```
 // Common Directory Structure
@@ -158,7 +157,9 @@ project/
    public/...
 ```
 
-Let's just say we want the `goodbye.js` view to utilize the `hello.html` template.
+Furthermore, to demonstrate the path flexibility...
+
+...let's just say we want the `goodbye.js` view to utilize the `hello.html` template.
 We can actually put in a `..` within the path to get into the `views/` directory.  
 See the `goodbye.js` example code below.
 
