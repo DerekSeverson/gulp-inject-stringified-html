@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 var gutil = require('gulp-util');
 var through = require('through2');
 var path = require('path');
@@ -50,7 +49,7 @@ function doInjectHtml(contents, relpath) {
 
   // Do replacement!
 
-  while (_.isArray((result = regex.exec(contents)))) {
+  while ((result = regex.exec(contents)) != null) {
     found.push({
       replacee: result[0], // matching string !!!('./index.html')
       filepath: result[1]  // matching group  './index.html'
