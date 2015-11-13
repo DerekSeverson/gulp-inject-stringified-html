@@ -63,7 +63,7 @@ function sayHello() {
 }
 ```
 
-Result:
+_Result..._
 ```javascript
 // public/hello.js
 
