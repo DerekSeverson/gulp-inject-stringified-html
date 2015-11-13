@@ -159,9 +159,7 @@ project/
 
 Furthermore, to demonstrate the flexibility of file paths in `gulp-inject-stringify-html` plugin...
 
-...let's just say we want the `goodbye.js` view to utilize the `hello.html` template.
-We can actually put in a `..` within the path to get into the `views/` directory.  
-See the `goodbye.js` example code below.
+...let's just say we want the `goodbye.js` view to utilize the `hello.html` template. We can actually put in a `..` within the path to get into the `views/` directory.  See the `goodbye.js` example code below.
 
 ```javascript
 // src/views/goodbye.js
@@ -174,9 +172,9 @@ function sayGoodbye() {
 
 ##### Absolute Paths
 
-But sometimes projects have one directory holding all the templates - and thus 
-`gulp-inject-stringified-html` uses absolute path syntax which is the path 
-starting at where ever the `gulpfile.js` file exists (at `project/` directory).
+But sometimes projects have one directory holding all the templates.  Using the _absolute path_ syntax may work best here. 
+
+For absolute paths, the `gulp-inject-stringify-html` plugin joins the given path with the `gulpfile.js` location (ex: `project/` directory).
 
 ```
 // Alternative Common Directory Structure
