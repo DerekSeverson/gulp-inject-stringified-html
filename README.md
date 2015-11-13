@@ -11,8 +11,8 @@ For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/
 
 **_Pain Points_** with _Directives_ and _Templates_: 
 
-1. **BAD** - using `templateUrl` forces weird dependency between ViewModel code and URL location of its template
-2. **UGLY** - using `template` forces the developer to manually escape the html string (tedious, unreadable)
+1. **BAD** - `templateUrl` creates dependency between View logic and template's URL location
+2. **UGLY** - `template` forces developer to manually escape html string _(tedious, unreadable)_
 
 In a perfect world, `View` logic should be have readable templates and completely _orthogonal_ to how templates are retreived from URLs!!
 
