@@ -5,14 +5,16 @@
 
 ## Why?
 
-When building single page web applications (SPAs), the View / ViewController / Controller / Presenter / ViewModel (the star in MV* which we'll refer to as ViewController) needs to know the "template" being rendered and bound to.  For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/directive), either a `template` or `templateUrl` property can be given so the directive knows what html to render when compiled.  
+When building single page web applications (SPAs), the `View` logic needs to know the "template" to be rendered.  
 
-**Issues with Directives**: 
+For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/directive), either a `template` or `templateUrl` property can be given so the directive knows what html to render when compiled.  
 
-1. `template` forces the developer to manually escape the html string value
-2. `templateUrl` forces the developer to have to know the URL path that the template will be located at when deployed to a server or local environment
+**_Pain Points_ using Directives and Templates**: 
 
-In a perfect world, ViewController logic should be completely orthogonal to how resources are retreived from URLs.  Using `template` directive attribute is tedious for the developer and makes the html code unreadable.  Using `templateUrl` forces a irregular dependency between the ViewController and an URL for its required template causing further complications.
+1. Using `template` forces the developer to manually escape the html string value (tedious and unreadable)
+2. Using `templateUrl` forces weird dependency between ViewModel code and URL location of its template (bad)
+
+In a perfect world, `View` logic should be have readable templates and completely _orthogonal_ to how templates are retreived from URLs!!
 
 **Gulp plugin** `gulp-inject-stringified-html` **solves these problems**.
 
@@ -29,7 +31,9 @@ Then, add it to your gulpfile.js:
 
 ### Basics
 
-Basically, by putting `{ gulp_inject: './path/to/your/file.html' }` inside your javascript file and adding `gulp-inject-stringified-html` to your gulp tasks that build your javascript source code, the html template referenced in the javascript code will be stringified (escaped for embedding html in a javascript string) and injected inline. Below is the basic usage of how to use `gulp-inject-stringified-html` in a project using gulp as a build process and its expected results.
+Basically, by putting `{ gulp_inject: './path/to/your/file.html' }` inside your javascript file and adding `gulp-inject-stringified-html` to your gulp tasks that build your javascript source code, the html template referenced in the javascript code will be stringified (escaped for embedding html in a javascript string) and injected inline. 
+
+Below is the basic usage of how to use `gulp-inject-stringified-html` in a project using gulp as a build process and its expected results.
 
 ```javascript
 // gulpfile.js
@@ -200,6 +204,11 @@ function sayHello() {
   return { gulp_inject: '/src/templates/hello.html' };
 }
 ```
+
+And that's it!  Enjoy!  
+
+Feel free to message me about issues and/or questions.
+
 
 ---
 
