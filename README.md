@@ -19,9 +19,11 @@ In a perfect world...
 + Templates should be readable.
 + View logic should be _orthogonal_ to template URL location.
 
-A Solution...
+**_A Solution_**...
 
-+ **GOOD** - `gulp-inject-stringifed-html` plugin solves the above issues during the build process.
++ **GOOD** - embed template in View logic at build time.
+
+The `gulp-inject-stringified-html` does just that!!
 
 
 ## Usage
