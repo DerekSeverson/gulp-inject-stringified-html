@@ -2,17 +2,8 @@
 
 > Gulp Plugin to inject HTML templates into Javascript files.
 
-## Usage
 
-First, install `gulp-inject-stringified-html` as a development dependency:
-
-```
-npm install --save-dev gulp-inject-stringified-html
-```
-
-Then, add it to your gulpfile.js:
-
-### Why?
+## Why?
 
 When building single page web applications (SPAs), the View / ViewController / Controller / Presenter / ViewModel (the star in MV* which we'll refer to as ViewController) needs to know the "template" being rendered and bound to.  For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/directive), either a `template` or `templateUrl` property can be given so the directive knows what html to render when compiled.  
 
@@ -24,7 +15,18 @@ In a perfect world, ViewController logic should be completely orthogonal to how 
 
 **`gulp-inject-stringified-html` solves these problems. **
 
-### How?
+
+## Usage
+
+First, install `gulp-inject-stringified-html` as a development dependency:
+
+```
+npm install --save-dev gulp-inject-stringified-html
+```
+
+Then, add it to your gulpfile.js:
+
+### Basics
 
 Basically, by putting `{ gulp_inject: './path/to/your/file.html' }` inside your javascript file and adding `gulp-inject-stringified-html` to your gulp tasks that build your javascript source code, the html template referenced in the javascript code will be stringified (escaped for embedding html in a javascript string) and injected inline. Below is the basic usage of how to use `gulp-inject-stringified-html` in a project using gulp as a build process and its expected results.
 
@@ -35,7 +37,7 @@ var injectHtml = require('gulp-inject-stringified-html');
 
 gulp.task('js', function () {
   return gulp.src(['src/views/hello.js'])
-    .pipe(injectHtml())
+    .pipe(injectHtml())                    // <--- this!
     .pipe(gulp.dest('public/hello.js'));
 });
 ```
@@ -50,9 +52,7 @@ gulp.task('js', function () {
 // src/views/hello.js
 
 function sayHello() {
-  return {
-    gulp_inject: './hello.html'
-  };
+  return { gulp_inject: './hello.html' };  // <-- and this!
 }
 ```
 
@@ -61,7 +61,7 @@ Result:
 // public/hello.js
 
 function sayHello() {
-  return "<h2>Hello, World!</h2>"
+  return "<h2>Hello, World!</h2>";        // <-- turns into this!
 }
 ```
 
