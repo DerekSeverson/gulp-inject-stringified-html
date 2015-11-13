@@ -74,8 +74,7 @@ function sayHello() {
 
 ### JS Gulp Task Example
 
-Below is a more robust example of how `gulp-inject-stringified-html` plugin 
-fits into more complex Javascript build gulp tasks.
+A more complex javascript gulp task using `gulp-inject-stringified-html` plugin.
 
 ```javascript
 // gulpfile.js
