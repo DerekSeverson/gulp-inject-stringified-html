@@ -207,8 +207,6 @@ function sayHello() {
 
 And that's it!  Enjoy!  
 
-Feel free to message me about issues and/or questions.
-
 
 ---
 
