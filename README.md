@@ -128,7 +128,7 @@ function sayHello() {
 }
 ```
 
-### File Paths
+### Path Syntax
 
 ##### Relative Paths
 
