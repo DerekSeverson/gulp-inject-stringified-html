@@ -11,12 +11,12 @@ For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/
 
 **_Pain Points_** with _Directives_ and _Templates_: 
 
-1. **BAD** Using `template` forces the developer to manually escape the html string value (tedious and unreadable)
-2. **UGLY** Using `templateUrl` forces weird dependency between ViewModel code and URL location of its template (bad)
+1. **BAD** - using `templateUrl` forces weird dependency between ViewModel code and URL location of its template
+2. **UGLY** - using `template` forces the developer to manually escape the html string (tedious, unreadable)
 
 In a perfect world, `View` logic should be have readable templates and completely _orthogonal_ to how templates are retreived from URLs!!
 
-**Gulp plugin** `gulp-inject-stringified-html` **solves these problems**.
+The **GOOD** 
 
 
 ## Usage
