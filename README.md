@@ -9,10 +9,10 @@ When building single page web applications (SPAs), the `View` logic needs to kno
 
 For example, when using [AngularJS Directives](https://docs.angularjs.org/guide/directive), either a `template` or `templateUrl` property can be given so the directive knows what html to render when compiled.  
 
-**_Pain Points_ using Directives and Templates**: 
+**_Pain Points_** with _Directives_ and _Templates_: 
 
-1. Using `template` forces the developer to manually escape the html string value (tedious and unreadable)
-2. Using `templateUrl` forces weird dependency between ViewModel code and URL location of its template (bad)
+1. **BAD** Using `template` forces the developer to manually escape the html string value (tedious and unreadable)
+2. **UGLY** Using `templateUrl` forces weird dependency between ViewModel code and URL location of its template (bad)
 
 In a perfect world, `View` logic should be have readable templates and completely _orthogonal_ to how templates are retreived from URLs!!
 
