@@ -212,7 +212,8 @@ function sayHello() {
 }
 ```
 
-And that's it!  Enjoy!  
+And that's it!  **Enjoy!**
+
 
 
 ---
