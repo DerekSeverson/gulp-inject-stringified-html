@@ -20,18 +20,13 @@ function gulpInjectStringifiedHtml(params) {
   return through.obj(function (file, enc, cb) {
     var contents;
 
-    //if (gutil.isStream(file)) {
-    //  file.contents = file.contents.pipe(concatStream(function (buffer,) {
-    //
-    //  }));
-    //}
-    //
-    //if (gutil.isBuffer(file)) {
-    //  file.contents = doInjectHtml(file.contents, file.base);
-    //}
-
     file.pipe(concatStream({encoding: 'string'},function (data) {
-      file.contents = doInjectHtml(data, file, params);
+      try {
+        file.contents = doInjectHtml(data, file, params);
+      } catch (err) {
+        cb(err);
+        return;
+      }
       cb(null, file);
     }));
 
