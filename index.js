@@ -65,6 +65,7 @@ function doInjectHtml(contents, vinyl, params) {
 
     htmlContent = read(htmlFilePath);
     htmlContent = htmlJsStr(htmlContent);
+    // remove new lines and tabs, still escape quotes as expected
     if (params && params.minify) {
       htmlContent = htmlContent.replace(/[\t\n]+/g,'');
       htmlContent = htmlContent.replace(/\\n/g, '');
