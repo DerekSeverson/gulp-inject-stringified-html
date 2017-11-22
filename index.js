@@ -65,6 +65,10 @@ function doInjectHtml(contents, vinyl, params) {
 
     htmlContent = read(htmlFilePath);
     htmlContent = htmlJsStr(htmlContent);
+    if (params && params.minify) {
+      htmlContent = htmlContent.replace(/[\t\n]+/g,'');
+      htmlContent = htmlContent.replace(/\\n/g, '');
+    }
     htmlContent = ['"', htmlContent, '"'].join('');
 
     contents = contents.replace(o.replacee, htmlContent);
