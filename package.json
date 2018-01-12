@@ -3,9 +3,7 @@
   "version": "2.0.0-alpha.1",
   "description": "Gulp Plugin to Inject Html Files as Strings via Escape Sequences",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "files": [],
   "scripts": {
     "lint": "eslint index.js",
     "test": "mocha",
