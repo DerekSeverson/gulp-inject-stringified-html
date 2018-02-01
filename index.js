@@ -1,34 +1,35 @@
 'use strict';
 
-var gutil = require('gulp-util');
 var through = require('through2');
 var path = require('path');
 var fs = require('fs');
 var htmlJsStr = require('js-string-escape');
-var concatStream = require('concat-stream');
+var bufferstreams = require('bufferstreams');
 
-
-var PluginError = gutil.PluginError;
 var PLUGIN_NAME = 'gulp-inject-stringified-html';
-
-
 
 // gulp plugin
 function gulpInjectStringifiedHtml(params) {
 
   // create and return a stream through which each file will pass
   return through.obj(function (file, enc, cb) {
-    var contents;
 
-    file.pipe(concatStream({encoding: 'string'},function (data) {
-      try {
-        file.contents = doInjectHtml(data, file, params);
-      } catch (err) {
-        cb(err);
-        return;
-      }
+    if (file.isNull()) {
+      return cb(null, file);
+    }
+
+    if (file.isStream()) {
+      file.contents = file.contents.pipe(new bufferstreams(function (err, buf, cb) {
+        if (err) throw err;
+        cb(null, doInjectHtml(buf.toString(), file, params));
+      }));
       cb(null, file);
-    }));
+    }
+
+    if (file.isBuffer()) {
+      file.contents = doInjectHtml(file.contents.toString(), file, params);
+      cb(null, file);
+    }
 
   });
 }
